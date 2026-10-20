@@ -1,37 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
-#include <lexer.h>
+#include "lexer.h"
 
-
-typedef enum {
-  Int,
-} TypeLiterral;
-
-typedef enum {
-  EXIT,
-} TypeKeyWord;
-
-typedef enum {
-  SemiComa,
-  OpenPara,
-  ClosedPara,
-} TypeSeparator;
-
-typedef struct {
-  TypeLiterral type;
-  int value;
-} TokenLiterral;
-
-typedef struct {
-  TypeKeyWord type;
-} TokenKeyWord;
-
-typedef struct {
-  TypeSeparator type;
-} TokenSeparator;
-
-void lexer(FILE *file){
+/*void lexer(FILE *file){
   char current = fgetc(file);
 
     while (current != EOF)
@@ -39,12 +11,63 @@ void lexer(FILE *file){
       printf("%c", current);
       current = fgetc(file); 
     }
+}*/
+
+int getSizeofFile(char *name){
+  int size = 0;
+  FILE* current = fopen(name,"r");
+
+  if (current == NULL) {
+        printf("Could not open file %s\n", name);
+        return 0;
+  }
+
+  while (fgetc(current) != EOF)
+  {
+    size++;
+  }
+  
+  fclose(current);
+  return size;
+}
+
+char* fileToString(char *name, int size){
+  FILE* file = fopen(name,"r");
+  char* arr = malloc((size + 1) * sizeof(char));
+  int c,i = 0;
+
+  if (file == NULL) {
+        printf("Could not open file %s\n", name);
+        return NULL;
+  }
+
+  if (arr == NULL){
+    printf("no memory");
+    fclose(file);
+    return NULL;
+  }
+  
+  while ((c = fgetc(file)) != EOF){
+    arr[i] = c;
+    i++;
+  }
+
+  arr[i] = '\0';
+  fclose(file);
+  return arr;
 }
 
 
 int main(void) {
-    FILE *file;
-    file = fopen("test.txt", "r");
-    lexer(file);
+    FILE* file;
+    int count = getSizeofFile("test.txt");
+    char* arr = fileToString("test.txt", count);
+
+    for (int i = 0; i < count; i++)
+    {
+      printf("%c", arr[i]);
+    }
+    
+    //lexer(arr);
     return 0;
 }

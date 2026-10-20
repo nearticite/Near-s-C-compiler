@@ -3,26 +3,8 @@
 
 void lexer(char *input, int len){ 
 
-  
-
-  for (int i = 0; i < len; i++)
-  {
-    if (input[i] == ' ' )
-    {
-      switch ()
-      {
-      case constant expression:
-        /* code */
-        break;
-      
-      default:
-        break;
-      }
-    }
-    
-  }
-  
-
+  /* */
+  return;
 }
 
 typedef enum {
@@ -39,10 +21,10 @@ typedef enum {
   ClosedPara,
 } TypeSeparator;
 
-typedef union{
+/*typedef union{
   TypeLiterral type;
   int value;
-} TokenLiterral;
+} TokenLiterral;*/
 
 typedef struct {
   TypeKeyWord type;
