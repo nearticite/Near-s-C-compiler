@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
-// #include "lexer.h"
+#include <lexer.h>
+
 
 typedef enum {
   Int,
